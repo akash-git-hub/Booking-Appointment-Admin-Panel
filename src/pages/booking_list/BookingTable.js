@@ -71,16 +71,23 @@ const BookingTable = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {myBookings.map((row, index) => {
-                                        const timeSlot = formatTimeSlot(row.slot.utc_start_date_time, row.slot.utc_end_date_time);
-                                        return (
-                                            <tr key={index}>
-                                                <th className="p-3">{row.unique_booking_id}</th>
-                                                <td className="p-3">{timeSlot.date}</td>
-                                                <td className="p-3">{timeSlot.Slot}</td>
-                                            </tr>
-                                        );
-                                    })}
+                                    {myBookings.length ? (
+                                        myBookings.map((row, index) => {
+                                            const timeSlot = formatTimeSlot(row.slot.utc_start_date_time, row.slot.utc_end_date_time);
+                                            return (
+                                                <tr key={index}>
+                                                    <th className="p-3">{row.unique_booking_id}</th>
+                                                    <td className="p-3">{timeSlot.date}</td>
+                                                    <td className="p-3">{timeSlot.Slot}</td>
+                                                </tr>
+                                            );
+                                        })
+                                    ) : (
+                                        <tr>
+                                            <td colSpan="3" className="text-center">Data not found</td>
+                                        </tr>
+                                    )}
+
                                 </tbody>
                             </table>
                         </div>
