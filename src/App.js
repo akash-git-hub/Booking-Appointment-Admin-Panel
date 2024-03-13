@@ -1,20 +1,21 @@
 import './App.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Login from './auth/Login/login';
-import Appointment from './main/pages/Appointment/appointment';
-import Calendar from './main/pages/Calendar/calendar';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+import Login from './pages/auth/Login';
+import BookingList from './pages/booking_list/BookingList';
+import Calendar from './pages/calender/Calender';
+import { AuthContext } from "./states/AuthContext";
+import { useContext } from "react";
 
 
 function App() {
+  const { loggedIn } = useContext(AuthContext);
   return (
     <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Login/>} />
-          <Route path="/appointment" element={<Appointment/>} />
-          <Route path="/calendar" element={<Calendar/>} />
-        </Routes>
-      </BrowserRouter>
+      <Routes>
+        <Route path="/" element={loggedIn ? <Navigate to="/calendar" /> : <Login />} />
+        <Route path="/booking-list" element={loggedIn ? <BookingList /> : <Navigate to="/" />} />
+        <Route path="/calendar" element={loggedIn ? <Calendar /> : <Navigate to="/" />} />
+      </Routes>
     </div>
   );
 }

@@ -8,18 +8,17 @@ const localizer = momentLocalizer(moment);
 
 const MyCalendar = () => {
 
-
-  return (
-    <Container>
-      <div style={{ height: 500 }}>
-        <Calendar
-          localizer={localizer}
-          startAccessor="start"
-          endAccessor="end"
-        />
-      </div>
-    </Container>
-  );
+    return (
+        <Container>
+            <div style={{ height: 500 }}>
+                <Calendar
+                    localizer={localizer}
+                    startAccessor="start"
+                    endAccessor="end"
+                />
+            </div>
+        </Container>
+    );
 };
 
 export default MyCalendar;
