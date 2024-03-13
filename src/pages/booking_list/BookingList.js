@@ -28,7 +28,7 @@ const BookingList = () => {
                                     {/*end col*/}
                                 </div>
                                 {/*end row*/}
-                                <AppointmentTable />
+                                {/* <AppointmentTable /> */}
                             </div>
                         </div>
                         {/*end container*/}

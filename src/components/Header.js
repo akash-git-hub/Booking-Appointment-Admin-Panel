@@ -32,7 +32,7 @@ const Header = () => {
                             <span className="big">
                                 <img
                                     src="../assets/images/logo-dark.png"
-                                    height={22}
+                                    height={40}
                                     className="logo-light-mode"
                                     alt=""
                                 />

@@ -53,13 +53,13 @@ const Login = () => {
                 <div className="container">
                     <div className="row justify-content-center">
                         <div className="col-lg-5 col-md-8">
-                            <img
-                                src="../assets/images/logo-dark.png"
-                                height={22}
-                                className="mx-auto d-block"
-                                alt=""
-                            />
-                            <div className="card login-page shadow mt-4 rounded border-0">
+                            <div className="card login-page shadow mt-4 rounded border-0 pt-5">
+                                <img
+                                    src="../assets/images/logo-dark.png"
+                                    height={50}
+                                    className="mx-auto d-block"
+                                    alt=""
+                                />
                                 <div className="card-body">
                                     <h4 className="text-center">Sign In</h4>
                                     <form onSubmit={onSubmitHandler} className="login-form mt-4">
