@@ -1,48 +1,43 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const Pagination = () => {
+const Pagination = ({ totalpg, crpage, onClick }) => {
+    const pageNumbers = [];
+    let i = 1;
+    while (i <= totalpg) {
+        pageNumbers.push(i);
+        i++;
+    }
     return (
         <>
             <div className="col-12 mt-4">
-                <div className="d-md-flex align-items-center text-center justify-content-between">
-                    <span className="text-muted me-3">
-                        Showing 1 - 10 out of 50
-                    </span>
+                <div className="d-md-flex align-items-center text-center justify-content-end">
                     <ul className="pagination justify-content-center mb-0 mt-3 mt-sm-0">
-                        <li className="page-item">
-                            <Link
-                                className="page-link"
-                                href="/"
-                                aria-label="Previous"
-                            >
-                                Prev
-                            </Link>
-                        </li>
-                        <li className="page-item active">
-                            <Link className="page-link" href="/">
-                                1
-                            </Link>
-                        </li>
-                        <li className="page-item">
-                            <Link className="page-link" href="/">
-                                2
-                            </Link>
-                        </li>
-                        <li className="page-item">
-                            <Link className="page-link" href="/">
-                                3
-                            </Link>
-                        </li>
-                        <li className="page-item">
-                            <Link
-                                className="page-link"
-                                href="/"
-                                aria-label="Next"
-                            >
-                                Next
-                            </Link>
-                        </li>
+                        {crpage === 1 ?
+                            <li className="page-item">
+                                <button disabled className="page-link c_pointer" aria-label="Previous" >  Prev </button>
+                            </li>
+                            :
+                            <li className="page-item" onClick={() => onClick(crpage - 1)}>
+                                <button disabled className="page-link c_pointer" aria-label="Previous" >  Prev </button>
+                            </li>
+
+                        }
+                        {pageNumbers.map((value, key) => (
+                            <li key={key} className={crpage == value ? "page-item active" : "page-item"} onClick={() => onClick(value)}>
+                                <button className="page-link c_pointer">{value}</button>
+                            </li>
+                        ))}
+
+                        {crpage < totalpg ?
+                            <li className="page-item" onClick={() => onClick(crpage + 1)}>
+                                <button className="page-link c_pointer" aria-label="Next" > Next </button>
+                            </li>
+                            :
+                            <li className="page-item">
+                                <button disabled className="page-link c_pointer" aria-label="Next" > Next </button>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

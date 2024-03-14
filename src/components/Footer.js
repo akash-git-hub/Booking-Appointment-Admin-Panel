@@ -3,30 +3,10 @@ import { Link } from 'react-router-dom'
 const Footer = () => {
     return (
         <>
-            <footer className="bg-footer-color shadow py-3">
-                <div className="container-fluid">
-                    <div className="row align-items-center">
-                        <div className="col">
-                            <div className="text-sm-start text-center">
-                                <p className="mb-0 text-muted">
-                                    <i className="mdi mdi-heart text-danger" /> by{" "}
-                                    <Link
-                                        href="https://futurristic.com/"
-                                        target="_blank"
-                                        className="text-reset"
-                                    >
-                                        Futurristic
-                                    </Link>
-                                    .
-                                </p>
-                            </div>
-                        </div>
-                        {/*end col*/}
-                    </div>
-                    {/*end row*/}
-                </div>
-                {/*end container*/}
-            </footer>
+        <footer className="w-100" style={{ background: 'white' }}>
+                <h6 className="text-center p-2 mt-3 mb-0" >Powered by <img style={{maxWidth:'36px'}} src='doctor/assets/images/boderfav.png' /><Link target='blank' to={"https://www.state1.io"} ><u style={{fontSize:'12px'}}>State1 Metaverse</u></Link></h6>
+            {/* </div> */}
+        </footer >
         </>
     )
 }

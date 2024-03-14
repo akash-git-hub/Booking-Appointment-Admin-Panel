@@ -3,27 +3,23 @@ import { Link } from 'react-router-dom'
 import Pagination from '../../components/Pagination';
 import { getMyBookings } from "../../networking/NetworkCall"
 import Loader from '../../components/Loader';
-import moment from 'moment';
-import 'moment-timezone';
+// import moment from 'moment';
+import moment from 'moment-timezone';
 
-const BookingTable = () => {
-    const [loading, setLoading] = useState(true);
+
+const BookingTable = ({loderHandler}) => {
+    // const [loading, setLoading] = useState(true);
     const [myBookings, setMyBookings] = useState([]);
 
+    const [ttpage, setTtpage] = useState(0);
+    const [crpage, setcrpage] = useState(1);
 
     const formatTimeSlot = (utc_start_date_time, utc_end_date_time) => {
-        // Parse the UTC start and end times using Moment.js
         const startMoment = moment.utc(utc_start_date_time).local();
         const endMoment = moment.utc(utc_end_date_time).local();
-
-        // Format the date in "20th Dec 2024" format
         const formattedDate = startMoment.format('Do MMM YYYY');
-
-        // Format the start and end times in "11:00AM To 12:00PM" format
         const formattedStartTime = startMoment.format('h:mmA');
         const formattedEndTime = endMoment.format('h:mmA');
-
-        // Combine the formatted date and time into a time slot string
         const timeSlot = {
             date: formattedDate,
             Slot: `${formattedStartTime} To ${formattedEndTime}`
@@ -32,76 +28,62 @@ const BookingTable = () => {
         return timeSlot;
     };
 
+    const getmybookingHandler = async (page) => {
+        let pg = '';
+        if (page) { pg = page } else { pg = crpage }
+        loderHandler(true);
+        const res = await getMyBookings(pg);
+        if (res.success) {
+            setMyBookings(res.data);
+            setTtpage(res.totalNumberOfPages);
+        }
+        loderHandler(false);
+    }
 
-    useEffect(() => {
-        setLoading(true);
-        const getData = async () => {
-            const res = await getMyBookings();
-            if (res.success) {
-                setMyBookings(res.data);
-                // setTotalNumberOfPages(res.totalNumberOfPages);
-            }
-            setLoading(false);
-        };
-        getData();
-    }, []);
+    useEffect(() => { getmybookingHandler(); }, []);
+    const pageHandler = (e) => { setcrpage(e); getmybookingHandler(e); }
 
     return (
         <>
-            {loading ? <Loader /> : <>
-                <div className="row">
-                    <div className="col-12 mt-4">
-                        <div className="table-responsive bg-white shadow rounded">
-                            <table className="table mb-0 table-center">
-                                <thead>
+            <div className="row">
+                <div className="col-12 mt-4">
+                    <div className="table-responsive bg-white shadow p-4">
+                        <table className="table mb-0 table-center">
+                            <thead>
+                                <tr>
+                                    <th  className="border-bottom p-3"  style={{ minWidth: 50 }} > Booking Code </th>
+                                    <th  className="border-bottom p-3" style={{ minWidth: 150 }} >Slot Date </th>
+                                    <th className="border-bottom p-3">Slot Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {myBookings && myBookings.length > 0 ? (
+                                    myBookings.map((row, index) => {
+                                        const timeSlot = formatTimeSlot(row.slot.utc_start_date_time, row.slot.utc_end_date_time);
+                                        return (
+                                            <tr key={index}>
+                                                <th className="p-3">{row.unique_booking_id}</th>
+                                                <td className="p-3">{timeSlot.date}</td>
+                                                <td className="p-3">{timeSlot.Slot}</td>
+                                            </tr>
+                                        );
+                                    })
+                                ) : (
                                     <tr>
-                                        <th
-                                            className="border-bottom p-3"
-                                            style={{ minWidth: 50 }}
-                                        >
-                                            Booking Id
-                                        </th>
-                                        <th
-                                            className="border-bottom p-3"
-                                            style={{ minWidth: 150 }}
-                                        >
-                                            Date
-                                        </th>
-                                        <th className="border-bottom p-3">Slot</th>
+                                        <td colSpan="3" className="text-center">Data not found</td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    {myBookings.length ? (
-                                        myBookings.map((row, index) => {
-                                            const timeSlot = formatTimeSlot(row.slot.utc_start_date_time, row.slot.utc_end_date_time);
-                                            return (
-                                                <tr key={index}>
-                                                    <th className="p-3">{row.unique_booking_id}</th>
-                                                    <td className="p-3">{timeSlot.date}</td>
-                                                    <td className="p-3">{timeSlot.Slot}</td>
-                                                </tr>
-                                            );
-                                        })
-                                    ) : (
-                                        <tr>
-                                            <td colSpan="3" className="text-center">Data not found</td>
-                                        </tr>
-                                    )}
+                                )}
 
-                                </tbody>
-                            </table>
-                        </div>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
+            </div>
+            {myBookings && myBookings.length > 0 &&
                 <div className="row text-center">
-                    {/* PAGINATION START */}
-                    {/* <Pagination /> */}
-                    {/*end col*/}
-                    {/* PAGINATION END */}
+                    <Pagination onClick={pageHandler} totalpg={ttpage} crpage={crpage} />
                 </div>
-
-            </>}
-
+            }
         </>
     )
 }

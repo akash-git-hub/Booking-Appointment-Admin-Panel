@@ -104,8 +104,8 @@ export const getSlotsDate = async () => {
     return await getRequest(path);
 };
 
-export const getSlotsByDate = async () => {
-    const path = `/doctor/slot/getSlotsByDate?utc_slot_date=2024-03-13`;
+export const getSlotsByDate = async (date) => {
+    const path = `/doctor/slot/getSlotsByDate?utc_slot_date=${date}`;
     return await getRequest(path);
 };
 
@@ -114,7 +114,7 @@ export const bookSlot = async (data) => {
     return await postRequest(path, data);
 }
 
-export const getMyBookings = async () => {
-    const path = `/doctor/slotBooking/getMyBookings`;
+export const getMyBookings = async (page) => {
+    const path = `/doctor/slotBooking/getMyBookings?page=${page}`;
     return await getRequest(path);
 }

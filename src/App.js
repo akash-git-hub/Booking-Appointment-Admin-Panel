@@ -5,6 +5,7 @@ import BookingList from './pages/booking_list/BookingList';
 import Calendar from './pages/calender/Calender';
 import { AuthContext } from "./states/AuthContext";
 import { useContext } from "react";
+import 'react-calendar/dist/Calendar.css';
 
 
 function App() {
