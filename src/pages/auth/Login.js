@@ -57,7 +57,7 @@ const Login = () => {
                         <div className="col-lg-5 col-md-8">
                             <div className="card login-page shadow mt-4 rounded border-0 pt-5">
                                 <img
-                                    src="doctor/assets/images/logo-dark.png"
+                                    src="/doctor/assets/images/logo-dark.png"
                                     height={50}
                                     className="mx-auto d-block"
                                     alt=""

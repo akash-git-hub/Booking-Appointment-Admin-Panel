@@ -24,20 +24,20 @@ const Header = () => {
                     <div className="d-flex align-items-center">
                         <Link to="#" className="logo-icon">
                             <img
-                                src="doctor/assets/images/logo-icon.png"
+                                src="/doctor/assets/images/logo-icon.png"
                                 height={30}
                                 className="small"
                                 alt=""
                             />
                             <span className="big">
                                 <img
-                                    src="doctor/assets/images/logo-dark.png"
+                                    src="/doctor/assets/images/logo-dark.png"
                                     height={40}
                                     className="logo-light-mode"
                                     alt=""
                                 />
                                 <img
-                                    src="doctor/assets/images/logo-light.png"
+                                    src="/doctor/assets/images/logo-light.png"
                                     height={22}
                                     className="logo-dark-mode"
                                     alt=""

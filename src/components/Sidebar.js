@@ -14,7 +14,7 @@ const Sidebar = () => {
                     <div className="sidebar-brand">
                         <Link to="/calendar" style={{width:'100%',height:'100%'}}>
                             <img style={{objectFit:' scale-down'}}
-                                src="doctor/assets/images/logo-dark.png"
+                                src="/doctor/assets/images/logo-dark.png"
                                 className="logo-light-mode w-100"
                                 alt=""
                             />
