@@ -35,6 +35,7 @@ const Login = () => {
             setLoggedIn(true);
             localStorage.setItem("loggedIn", "true");
             localStorage.setItem("authToken", `${res.data.token}`);
+            localStorage.setItem("profileData", JSON.stringify(res.data));
             toast.success(res.message);
             Navigate("/calendar", { replace: true });
         } else {

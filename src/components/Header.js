@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from "../states/AuthContext";
 import { useContext } from "react";
 
 const Header = () => {
+    const [userName, setUserName] = useState("");
     const { setLoggedIn } = useContext(AuthContext);
     const navigate = useNavigate();
     const onLogoutHandler = () => {
@@ -16,6 +17,18 @@ const Header = () => {
         document.getElementById("sidebar").classList.toggle("toggled");
         document.querySelector(".page-wrapper").classList.toggle("toggled");
     };
+
+    const getData = () => {
+        const profileData = localStorage.getItem("profileData");
+        if (profileData) {
+            const parsedData = JSON.parse(profileData);
+            if (profileData) {
+                setUserName(parsedData.user_name);
+            }
+        }
+    }
+
+    useEffect(() => { getData() }, []);
 
     return (
         <>
@@ -84,6 +97,9 @@ const Header = () => {
                                     <i className="bi bi-box-arrow-right" />
                                 </div>
                             </span>
+                            <span style={{
+                                marginLeft: '10px',
+                            }}>{userName || "username"}</span>
                         </li>
                     </ul>
                 </div>
