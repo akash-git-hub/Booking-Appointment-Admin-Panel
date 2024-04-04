@@ -19,10 +19,10 @@ const Pagination = ({ totalpg, crpage, onClick }) => {
                             </li>
                             :
                             <li className="page-item" onClick={() => onClick(crpage - 1)}>
-                                <button disabled className="page-link c_pointer" aria-label="Previous" >  Prev </button>
+                                <button className="page-link c_pointer" aria-label="Previous" >  Prev </button>
                             </li>
-
                         }
+
                         {pageNumbers.map((value, key) => (
                             <li key={key} className={crpage == value ? "page-item active" : "page-item"} onClick={() => onClick(value)}>
                                 <button className="page-link c_pointer">{value}</button>

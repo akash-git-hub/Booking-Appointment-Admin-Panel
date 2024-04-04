@@ -2,7 +2,7 @@ import axios from "axios";
 const baseUrl = process.env.REACT_APP_baseUrl;
 
 const getHeader = () => {
-    const authToken = localStorage.getItem("authToken");
+    const authToken = localStorage.getItem("doctorAuthToken");
 
     const headers = {
         Authorization: "Bearer " + authToken, //the token is a variable which holds the token
@@ -116,5 +116,10 @@ export const bookSlot = async (data) => {
 
 export const getMyBookings = async (page) => {
     const path = `/doctor/slotBooking/getMyBookings?page=${page}`;
+    return await getRequest(path);
+}
+
+export const getMySessionsDetail = async (page, limit) => {
+    const path = `/doctor/sessionDetail/getMySessionsDetail?page=${page}&limit=${limit}`;
     return await getRequest(path);
 }

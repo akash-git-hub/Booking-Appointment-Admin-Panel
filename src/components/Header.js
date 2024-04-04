@@ -5,11 +5,15 @@ import { useContext } from "react";
 
 const Header = () => {
     const [userName, setUserName] = useState("");
-    const { setLoggedIn } = useContext(AuthContext);
+    const { setDoctorLoggedIn } = useContext(AuthContext);
     const navigate = useNavigate();
     const onLogoutHandler = () => {
-        setLoggedIn(false);
-        localStorage.clear();
+        setDoctorLoggedIn(false);
+        // localStorage.clear();
+        const keysToRemove = ["doctorLoggedIn", "doctorAuthToken", "doctorProfileData"];
+        keysToRemove.forEach(key => {
+            localStorage.removeItem(key);
+        });
         navigate("/", { replace: true })
     };
 
@@ -19,7 +23,7 @@ const Header = () => {
     };
 
     const getData = () => {
-        const profileData = localStorage.getItem("profileData");
+        const profileData = localStorage.getItem("doctorProfileData");
         if (profileData) {
             const parsedData = JSON.parse(profileData);
             if (profileData) {

@@ -13,7 +13,7 @@ const Login = () => {
     const [loading, setLoading] = useState(false);
     const userNameRef = useRef();
     const pwdRef = useRef();
-    const { setLoggedIn } = useContext(AuthContext);
+    const { setDoctorLoggedIn } = useContext(AuthContext);
     const Navigate = useNavigate();
 
     const onSubmitHandler = async (e) => {
@@ -32,10 +32,10 @@ const Login = () => {
         };
         const res = await login(data);
         if (res.success) {
-            setLoggedIn(true);
-            localStorage.setItem("loggedIn", "true");
-            localStorage.setItem("authToken", `${res.data.token}`);
-            localStorage.setItem("profileData", JSON.stringify(res.data));
+            setDoctorLoggedIn(true);
+            localStorage.setItem("doctorLoggedIn", "true");
+            localStorage.setItem("doctorAuthToken", `${res.data.token}`);
+            localStorage.setItem("doctorProfileData", JSON.stringify(res.data));
             toast.success(res.message);
             Navigate("/calendar", { replace: true });
         } else {
