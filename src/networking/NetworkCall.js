@@ -123,3 +123,8 @@ export const getMySessionsDetail = async (page, limit) => {
     const path = `/doctor/sessionDetail/getMySessionsDetail?page=${page}&limit=${limit}`;
     return await getRequest(path);
 }
+
+export const updateSessionDetail = async (id, data) => {
+    const path = `/doctor/sessionDetail/updateSessionDetail/${id}`;
+    return await putRequest(path, data);
+}

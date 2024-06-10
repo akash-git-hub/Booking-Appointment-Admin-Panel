@@ -6,6 +6,8 @@ import Loader from '../../components/Loader';
 // import moment from 'moment';
 import moment from 'moment-timezone';
 import ImgModal from '../../components/ImgModel';
+import Button from 'react-bootstrap/Button';
+import DialogModal from '../../components/DialogModal';
 
 
 const SessionDetailTable = ({ loderHandler }) => {
@@ -59,6 +61,7 @@ const SessionDetailTable = ({ loderHandler }) => {
                                     <th className="th-sm">Patient Name</th>
                                     <th className="th-sm">Slot Date/Time</th>
                                     <th className="th-sm">Prescription</th>
+                                    <th className="th-sm">Notes</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -72,6 +75,9 @@ const SessionDetailTable = ({ loderHandler }) => {
                                                 <td>{timeSlot.date} <p><b> {timeSlot.Slot}</b></p></td>
                                                 <td style={{ cursor: 'pointer' }}>
                                                     <ImgModal image={row?.prescription_file} ModalImgId={row.id} />
+                                                </td>
+                                                <td>
+                                                    <DialogModal notes={row?.notes} id={row?.id} />
                                                 </td>
                                             </tr>
                                         )
